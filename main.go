@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"math/rand"
 	"os"
 
 	"github.com/joho/godotenv"
@@ -37,15 +38,15 @@ func main() {
 
 	// Creating the collection and inserting data
 	coll := client.Database("Personal").Collection("students")
-	// res, err := coll.InsertOne(context.Background(), bson.M{
-	// 	"name": "Soham Ghugare",
-	// 	"roll": rand.Intn(9999) + 10000,
-	// })
-	// if err != nil {
-	// 	panic(err)
-	// }
-	// id := res.InsertedID
-	// fmt.Printf("Added data at id %v\n", id)
+	res, err := coll.InsertOne(context.Background(), bson.M{
+		"name": "Soham Ghugare",
+		"roll": rand.Intn(9999) + 10000,
+	})
+	if err != nil {
+		panic(err)
+	}
+	id := res.InsertedID
+	fmt.Printf("Added data at id %v\n", id)
 
 	results := []struct {
 		Name string
